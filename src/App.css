@@ -2,11 +2,12 @@
   margin: 0 auto;
   padding: 2rem;
   background-color: #c1121f;
-  border-radius: 15px;
+  border-radius: 5px;
+  min-width: 600px;
 }
 
 input {
-  border-radius: 8px;
+  border-radius: 5px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
@@ -17,4 +18,27 @@ input {
   margin-right: 5px;
 }
 
+.pokemonDisplay {
+  display: flex;  /* Change from 'flexbox' to 'flex' */
+  max-width: 150px;
+  height: 150px;
+  border: 5px solid black;
+  border-radius: 5px;
+  background-color: darkgrey;
+}
 
+.pokemonDescription {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  height: 150px;
+  border: 5px solid black;
+  border-radius: 5px;
+  background-color: darkgrey;
+  font-size: 12px;
+}
+
+.display {
+  display: flex;
+  flex-direction: row;
+}
