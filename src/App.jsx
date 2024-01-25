@@ -1,10 +1,13 @@
 import { useState } from 'react'
 import './App.css'
 
-function App() {
+export default function App() {
   const [pokemonData, setPokemonData] = useState(null)
   const [loading, setLoading] = useState(false)
-
+  const [types, setTypes] = useState([])
+  const [stats, setStats] = useState([])
+  const [abilities, setAbilities] = useState([])
+ 
   async function getPokemon() {
     try {
       setLoading(true);
@@ -18,12 +21,25 @@ function App() {
 
       const data = await response.json();
       setPokemonData(data);
-    } catch (error) {
+      setTypes(data.types.map(type => type.type.name))
+      setStats(data.stats.map(stat => ({name: stat.stat.name, value: stat.base_stat})))
+      setAbilities(data.abilities.map(ability => ability.ability.name))
+    } 
+    catch (error) {
       console.error(error);
-    } finally {
+    } 
+    finally {
       setLoading(false);
     }
   }
+
+  const pokemonInfo = (
+    <>
+      <span><b>Type:</b> {types.join(', ')}</span><br />
+      <span><b>Stats:</b> {stats.map(stat => `${stat.name}: ${stat.value}`).join(', ')}</span><br />
+      <span><b>Abilities:</b> {abilities.join(', ')}</span>
+    </>
+  );
 
   return (
     <>
@@ -32,27 +48,12 @@ function App() {
         {loading && <p>Loading...</p>}
         {pokemonData && (
           <>
-            <img src={pokemonData.sprites.front_default} alt="pokemon image" id="sprite" className="pokemonDisplay" />
-            <div id="type" className="pokemonDescription">
-              <h2>Type:</h2>
-              {pokemonData.types.map(type => (
-                <span key={type.slot}>{type.type.name}</span>
-              ))}
-            </div>
-            <div id="stats" className="pokemonDescription">
-              <h2>Stats:</h2>
-              {pokemonData.stats.map(stat => (
-                <div key={stat.stat.name}>
-                  <span>{stat.stat.name}:</span>
-                  <span>{stat.base_stat}</span>
-                </div>
-              ))}
-            </div>
-            <div id="abilities" className="pokemonDescription">
-              <h2>Abilities:</h2>
-              {pokemonData.abilities.map(ability => (
-                <span key={ability.slot}>{ability.ability.name}</span>
-              ))}
+            <img src={pokemonData.sprites.front_default} alt="pokemon" className="pokemonDisplay" />
+            <div className="pokemonDescription">
+              <h2>Pokemon Info:</h2>
+              <div>
+                <span>{pokemonInfo}</span>
+              </div>
             </div>
           </>
         )}
@@ -63,5 +64,3 @@ function App() {
     </>
   );
 }
-
-export default App;

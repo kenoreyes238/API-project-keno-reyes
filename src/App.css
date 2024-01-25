@@ -19,7 +19,7 @@ input {
 }
 
 .pokemonDisplay {
-  display: flex;  /* Change from 'flexbox' to 'flex' */
+  display: flex;
   max-width: 150px;
   height: 150px;
   border: 5px solid black;
@@ -30,12 +30,13 @@ input {
 .pokemonDescription {
   display: flex;
   flex-direction: column;
-  max-width: 400px;
+  max-width: 500px;
   height: 150px;
   border: 5px solid black;
   border-radius: 5px;
   background-color: darkgrey;
-  font-size: 12px;
+  font-size: 11px;
+  overflow: auto;
 }
 
 .display {
