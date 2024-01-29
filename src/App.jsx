@@ -12,14 +12,15 @@ export default function App() {
     try {
       setLoading(true);
 
-      const pokemon = document.getElementById("pokemon").value
-      const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
+      const pokemon = document.getElementById("pokemon").value.toLower()
+      const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
 
       if (!response.ok) {
         throw new Error("Could not fetch");
       }
 
       const data = await response.json();
+      
       setPokemonData(data);
       setTypes(data.types.map(type => type.type.name))
       setStats(data.stats.map(stat => ({name: stat.stat.name, value: stat.base_stat})))
