@@ -12,7 +12,7 @@ export default function App() {
     try {
       setLoading(true);
 
-      const pokemon = document.getElementById("pokemon").value.toLower()
+      const pokemon = document.getElementById("pokemon").value.toLowerCase()
       const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
 
       if (!response.ok) {
